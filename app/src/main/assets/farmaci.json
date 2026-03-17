@@ -1,0 +1,46 @@
+{
+  "farmaci": [
+    {
+    "nomeFarmaco": "Metotressato",
+    "indicazioneClinica": "Psoriasi grave",
+    "tipoFormula":"per_m2",
+    "doseUnitaria":15,
+    "unitaMisura":"mg/m²",
+    "doseMax":25,
+    "etaMin":18,
+    "pesoMinimo": null,
+    "numeroSomministrazioni":1,
+    "alert":"Controindicato in gravidanza e insufficienza renale / epatica grave",
+    "fonte":"BNF / NICE / AIFA"
+
+    },
+    {
+      "nomeFarmaco": "Ivermectina",
+      "indicazioneClinica": "Scabbia",
+      "tipoFormula":"per_kg",
+      "doseUnitaria":200,
+      "unitaMisura":"ug/kg",
+      "doseMax":12,
+      "etaMin":5,
+      "pesoMinimo": 15,
+      "numeroSomministrazioni":1,
+      "alert":"Controindicato in bambini < 15 kg o < 5 anni. Non usare in gravidanza.",
+      "fonte":"BNF / NICE / WHO"
+
+    },
+    {
+      "nomeFarmaco": "Velamox",
+      "indicazioneClinica": "Infezioni batteriche",
+      "tipoFormula":"per_m2",
+      "doseUnitaria":15,
+      "unitaMisura":"mg/m²",
+      "doseMax":25,
+      "etaMin":18,
+      "pesoMinimo": null,
+      "numeroSomministrazioni":1,
+      "alert":"Controindicato in gravidanza e insufficienza renale / epatica grave",
+      "fonte":"BNF / NICE / AIFA"
+
+    },
+  ]
+}
