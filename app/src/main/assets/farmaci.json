@@ -1,25 +1,28 @@
 {
   "farmaci": [
-    {
-    "nomeFarmaco": "Metotressato",
-    "indicazioneClinica": "Psoriasi grave",
-    "tipoFormula":"per_m2",
-    "doseUnitaria":15,
-    "unitaMisura":"mg/m²",
-    "doseMax":25,
-    "etaMin":18,
-    "pesoMinimo": null,
-    "numeroSomministrazioni":1,
-    "alert":"Controindicato in gravidanza e insufficienza renale / epatica grave",
-    "fonte":"BNF / NICE / AIFA"
 
-    },
     {
-      "nomeFarmaco": "Ivermectina",
+      "nomeFarmaco": "Roaccutan",
+      "principioAttivo": "Isotretinoina",
+      "indicazioneClinica": "Acne nodulo-cistica",
+      "tipoFormula": "per_kg",
+      "doseUnitaria":0.5,
+      "unitaMisura": "mg/kg",
+      "doseMax": 1,
+      "etaMin": 12,
+      "pesoMinimo": null,
+      "numeroSomministrazioni": 2,
+      "alert": "Teratogeno. Obbligo di contraccezione. Monitorare trigliceridi e funzionalità epatica.",
+      "fonte": "BNF / NICE / AIFA / RCP Roaccutan"
+    },
+
+    {
+      "nomeFarmaco": "Scaver",
+      "principioAttivo": "Ivermectina",
       "indicazioneClinica": "Scabbia",
       "tipoFormula":"per_kg",
       "doseUnitaria":200,
-      "unitaMisura":"ug/kg",
+      "unitaMisura":"µg/kg",
       "doseMax":12,
       "etaMin":5,
       "pesoMinimo": 15,
@@ -28,9 +31,26 @@
       "fonte":"BNF / NICE / WHO"
 
     },
+
     {
-      "nomeFarmaco": "Velamox",
-      "indicazioneClinica": "Infezioni batteriche",
+      "nomeFarmaco": "Sandimmun Neoral",
+      "principioAttivo": "Ciclosporina",
+      "indicazioneClinica": "Psoriasi grave/ Dermatite atopica ",
+      "tipoFormula":"per_kg",
+      "doseUnitaria":2.5,
+      "unitaMisura":"mg/kg",
+      "doseMax":5,
+      "etaMin":18,
+      "pesoMinimo": null,
+      "numeroSomministrazioni":2,
+      "alert":"Monitorare pressione arteriosa e funzionalità renale. Controindicato in gravidanza.",
+      "fonte":"AIFA / RCP Sandimmun Neoral / NICE "
+
+    },
+    {
+      "nomeFarmaco": "Metrotessato Teva",
+      "principioAttivo" : "Metotrexato",
+      "indicazioneClinica": "Psoriasi grave",
       "tipoFormula":"per_m2",
       "doseUnitaria":15,
       "unitaMisura":"mg/m²",
@@ -39,8 +59,116 @@
       "pesoMinimo": null,
       "numeroSomministrazioni":1,
       "alert":"Controindicato in gravidanza e insufficienza renale / epatica grave",
-      "fonte":"BNF / NICE / AIFA"
+      "fonte":"BNF / NICE / AIFA / RCP Metotrexato"
 
     },
+
+    {
+
+      "nomeFarmaco": "Velamox",
+      "principioAttivo": "Amoxicillina",
+      "indicazioneClinica": "Infezioni batteriche/cutanee",
+      "tipoFormula":"fissa",
+      "doseUnitaria":500,
+      "unitaMisura":"mg",
+      "doseMax":3000,
+      "etaMin":18,
+      "pesoMinimo": null,
+      "numeroSomministrazioni":3,
+      "alert":"Controindicato in caso di allergia alle penicilline.",
+      "fonte":"AIFA / RCP Velamox"
+
+    },
+    {
+      "nomeFarmaco": "Bassado",
+      "principioAttivo": "Doxiciclina",
+      "indicazioneClinica": "Infezioni cutanee / Acne / Infezioni respiratorie",
+      "tipoFormula": "fissa",
+      "doseUnitaria":100,
+      "unitaMisura": "mg",
+      "doseMax": 100,
+      "etaMin": 12,
+      "pesoMinimo": null,
+      "numeroSomministrazioni": 1,
+      "alert": "Controindicato in gravidanza e bambini < 12 anni. Fotosensibilizzante.",
+      "fonte": "BNF / AIFA / RCP Bassado"
+    },
+
+    {
+      "nomeFarmaco": "Zitromax",
+      "principioAttivo": "Azitromicina",
+      "indicazioneClinica": "Infezioni batteriche della cute",
+      "tipoFormula": "fissa",
+      "doseUnitaria":500,
+      "unitaMisura": "mg",
+      "doseMax": 500,
+      "etaMin": 18,
+      "pesoMinimo": null,
+      "numeroSomministrazioni": 1,
+      "alert": "Attenzione in pazienti con patologie cardiache. Può prolungare QT.",
+      "fonte": "BNF / AIFA / RCP Zitromax"
+    },
+    {
+      "nomeFarmaco": "Diflucan",
+      "principioAttivo": "Fluconazolo",
+      "indicazioneClinica": "Infezioni fungine della cute",
+      "tipoFormula": "fissa",
+      "doseUnitaria":150,
+      "unitaMisura": "mg",
+      "doseMax": 150,
+      "etaMin": 18,
+      "pesoMinimo": null,
+      "numeroSomministrazioni": 1,
+      "alert": "Attenzione alle interazioni farmacologiche. Monitorare funzionalità epatica.",
+      "fonte": "BNF / AIFA / RCP Diflucan"
+
+    },
+    {
+    "nomeFarmaco": "Zinnat",
+    "principioAttivo": "Cefuroxima",
+    "indicazioneClinica": "Infezioni batteriche cutanee e tessuti molli",
+    "tipoFormula": "fasce",
+    "doseUnitaria" : null,
+    "unitaMisura": "mg",
+    "doseMax": 250,
+    "etaMin": null,
+    "pesoMinimo": 4,
+    "numeroSomministrazioni": 2,
+    "alert": "Attenzione ad allergia a cefalosporine. Aggiustare dose in insufficienza renale.",
+    "fonte": "AIFA / RCP Cefuroxima",
+    "fasce": [
+      { "pesoMin": 4.0,  "pesoMax": 6.0,  "doseMg": 50  },
+      { "pesoMin": 6.0,  "pesoMax": 12.5,  "doseMg": 100 },
+      { "pesoMin": 12.5,  "pesoMax": 25.0,  "doseMg": 200 },
+      { "pesoMin": 25,  "pesoMax": 1000.0,  "doseMg": 250 }
+      ]
+      },
+    {
+      "nomeFarmaco": "Suprax",
+      "principioAttivo": "Cefixima",
+      "indicazioneClinica": "Infezioni batteriche della cute",
+      "tipoFormula": "fasce",
+      "doseUnitaria": null,
+      "unitaMisura": "mg",
+      "doseMax": 400,
+      "etaMin": null,
+      "pesoMinimo": 10,
+      "numeroSomministrazioni": 1,
+      "alert": "Controindicato in caso di allergia alle cefalosporine o penicilline.",
+      "fonte": "AIFA / RCP Suprax",
+      "fasce": [
+        { "pesoMin": 10.0,  "pesoMax": 12.4,  "doseMg": 80  },
+        { "pesoMin": 12.5,  "pesoMax": 14.9,  "doseMg": 100 },
+        { "pesoMin": 15.0,  "pesoMax": 17.4,  "doseMg": 120 },
+        { "pesoMin": 17.5,  "pesoMax": 19.9,  "doseMg": 140 },
+        { "pesoMin": 20.0,  "pesoMax": 22.4,  "doseMg": 160 },
+        { "pesoMin": 22.5,  "pesoMax": 24.9,  "doseMg": 180 },
+        { "pesoMin": 25.0,  "pesoMax": 27.4,  "doseMg": 200 },
+        { "pesoMin": 27.5,  "pesoMax": 29.9,  "doseMg": 220 },
+        { "pesoMin": 30.0,  "pesoMax": 37.4,  "doseMg": 240 },
+        { "pesoMin": 37.5,  "pesoMax": 999,   "doseMg": 400 }
+      ]
+    }
+
   ]
 }
