@@ -2,6 +2,7 @@ package it.uninsubria.drugdose.calculator
 
 import it.uninsubria.drugdose.model.Farmaco
 import it.uninsubria.drugdose.model.TipoFormula
+import it.uninsubria.drugdose.utils.BsaCalculator
 
 object DosageCalculator{
 
@@ -55,7 +56,7 @@ object DosageCalculator{
             TipoFormula.per_m2 -> {
                 if (altezzaCm == null)
                     return Risultato.Errore("Altezza richiesta per il calcolo BSA")
-                val bsa = Math.sqrt((altezzaCm * pesoKg) / 3600.0)
+                val bsa = BsaCalculator.calcola(altezzaCm,pesoKg)
                 val dose = minOf(farmaco.doseUnitaria!! * bsa, farmaco.doseMax)
                 Risultato.Successo(
                     doseTotaleMg = dose,
