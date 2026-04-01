@@ -56,5 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
             txtRisultato.text = "Peso: $peso kg, Altezza: $altezza cm, Età: $eta"
         }
+
     }
 }

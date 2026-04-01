@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">DrugDose</string>
+    <string name="title_drugdose">DrugDose</string>
+    <string name="hint_peso">Peso (kg)</string>
+    <string name="hint_altezza">Altezza (cm)</string>
+    <string name="hint_eta">Età</string>
+    <string name="btn_calcola">Calcola</string>
+    <string name="label_risultato">Risultato</string>
+    <string name="hint_farmaco">Seleziona farmaco</string>
+
+    <string-array name="lista_farmaci">
+        <item>Paracetamolo</item>
+        <item>Ibuprofene</item>
+        <item>Amoxicillina</item>
+        <item>Metformina</item>
+        <item>Warfarin</item>
+    </string-array>
+
 </resources>
