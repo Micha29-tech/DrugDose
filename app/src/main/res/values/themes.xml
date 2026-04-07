@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DrugDose" parent="android:Theme.Material.Light.NoActionBar" />
+<style name="Theme.DrugDose" parent="Theme.MaterialComponents.NoActionBar" >
+
+    <!--Colori principali-->
+    <item name="colorPrimary">@color/accent_primary</item>
+    <item name="colorPrimaryVariant">@color/accent_secondary</item>
+    <item name="colorOnPrimary">@color/bg_dark</item>
+    <item name="colorSecondary">@color/accent_primary</item>
+    <item name="colorOnSecondary">@color/bg_dark</item>
+
+    <!--Background-->
+    <item name="android:windowBackground">@color/bg_dark</item>
+    <item name="android:colorBackground">@color/bg_dark</item>
+    <item name="colorSurface">@color/bg_card</item>
+    <item name="colorOnSurface">@color/text_primary</item>
+
+   <!--Testo-->
+    <item name="android:textColorPrimary">@color/text_primary</item>
+    <item name="android:textColorSecondary">@color/text_secondary</item>
+    <item name="android:textColorHint">@color/text_hint</item>
+
+    <!--  Status bar  -->
+    <item name="android:statusBarColor">@color/bg_dark</item>
+    <item name="android:windowLightStatusBar">false</item>
+
+    <!--  Input fields  -->
+    <item name="colorControlNormal">@color/text_hint</item>
+    <item name="colorControlActivated">@color/accent_primary</item>
+    <item name="colorControlHighlight">@color/accent_glow</item>
+
+
+    <!--  EditText stile outlined  -->
+    <item name="editTextStyle">@style/Widget.DrugDose.EditText</item>
+    </style>
+
+
+    <!--  Stile EditText outlined personalizzato  -->
+    <style name="Widget.DrugDose.EditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/accent_primary</item>
+        <item name="boxBackgroundColor">@color/bg_input</item>
+        <item name="hintTextColor">@color/accent_primary</item>
+    </style>
+
+
+    <!--  Stile per TextInputLayout  -->
+    <style name="DrugDose.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/selector_input_stroke</item>
+        <item name="boxBackgroundColor">@color/bg_input</item>
+        <item name="hintTextColor">@color/accent_primary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    </style>
+
+
+    <!--  Stile per il Button principale  -->
+    <style name="DrugDose.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/accent_primary</item>
+        <item name="android:textColor">@color/bg_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+
+    <!--  Stile Spinner personalizzato  -->
+    <style name="DrugDose.Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
+        <item name="android:popupBackground">@color/bg_card</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
 </resources>

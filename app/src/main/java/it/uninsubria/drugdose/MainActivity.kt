@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val etAltezza = findViewById<EditText>(R.id.etAltezza)
         val etEta = findViewById<EditText>(R.id.etEta)
         val btnCalcola = findViewById<Button>(R.id.btnCalcola)
-        val txtRisultato = findViewById<TextView>(R.id.txtRisultato)
+        val txtRisultato = findViewById<TextView>(R.id.txtDoseTotale)
 
         btnCalcola.setOnClickListener {
             val pesoText = etPeso.text.toString().trim()
