@@ -1,89 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="0dp"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_drugdose"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="32dp">
 
-    <Spinner
-        android:id="@+id/spinnerFarmaco"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:entries="@array/lista_farmaci"
-        android:importantForAutofill="no"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!--  ── HEADER ──  -->
+        <TextView
+            android:id="@+id/txtAppLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💊"
+            android:textSize="36sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="DrugDose"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:textAlignment="center"
+            android:letterSpacing="0.05"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/txtAppLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Calcolo dosaggi dermatologici"
+            android:textSize="13sp"
+            android:textColor="@color/accent_primary"
+            android:textAlignment="center"
+            android:letterSpacing="0.12"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintTop_toBottomOf="@id/txtTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    <EditText
-        android:id="@+id/etPeso"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_peso"
-        android:inputType="numberDecimal"
-        android:layout_marginBottom="8dp"
-        android:importantForAutofill="no"
-        app:layout_constraintTop_toBottomOf="@id/spinnerFarmaco"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!--  ── CARD PAZIENTE ──  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardPaziente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:padding="20dp"
+            app:layout_constraintTop_toBottomOf="@id/txtSubtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
-        android:id="@+id/etAltezza"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_altezza"
-        android:inputType="numberDecimal"
-        android:layout_marginBottom="8dp"
-        android:importantForAutofill="no"
-        app:layout_constraintTop_toBottomOf="@id/etPeso"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/lblPaziente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PARAMETRI PAZIENTE"
+                android:textSize="11sp"
+                android:textColor="@color/accent_primary"
+                android:textStyle="bold"
+                android:letterSpacing="0.15"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-    <EditText
-        android:id="@+id/etEta"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_eta"
-        android:inputType="number"
-        android:layout_marginBottom="16dp"
-        android:importantForAutofill="no"
-        app:layout_constraintTop_toBottomOf="@id/etAltezza"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btnCalcola"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_calcola"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/etEta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!--  Peso  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPeso" style="@style/DrugDose.TextInputLayout"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:hint="Peso"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/lblPaziente"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tilAltezza"
+                app:layout_constraintWidth_percent="0.47"
+                app:suffixText="kg"
+                app:suffixTextColor="@color/text_secondary">
 
-    <TextView
-        android:id="@+id/txtRisultato"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/label_risultato"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/btnCalcola"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPeso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/text_primary"
+                    android:importantForAutofill="no"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--  Altezza  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAltezza"
+                style="@style/DrugDose.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Altezza"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintTop_toBottomOf="@id/lblPaziente"
+                app:layout_constraintStart_toEndOf="@id/tilPeso"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:suffixText="cm"
+                app:suffixTextColor="@color/text_secondary">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAltezza"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/text_primary"
+                    android:importantForAutofill="no"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <!--  Età  -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEta"
+                style="@style/DrugDose.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Età"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/tilPeso"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tilAltezza"
+                app:layout_constraintWidth_percent="0.47"
+                app:suffixText="anni"
+                app:suffixTextColor="@color/text_secondary">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/text_primary"
+                    android:importantForAutofill="no"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--  ── CARD FARMACO ──  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardFarmaco"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:padding="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/cardPaziente"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/lblFarmaco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SELEZIONE FARMACO"
+                android:textSize="11sp"
+                android:textColor="@color/accent_primary"
+                android:textStyle="bold"
+                android:letterSpacing="0.15"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <Spinner
+                android:id="@+id/spinnerFarmaco"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_spinner"
+                android:paddingStart="16dp"
+                android:paddingEnd="40dp"
+                android:importantForAutofill="no"
+                android:popupBackground="@color/bg_card"
+                app:layout_constraintTop_toBottomOf="@id/lblFarmaco"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <!--  Info farmaco selezionato  -->
+            <TextView
+                android:id="@+id/txtFarmacoInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/spinnerFarmaco"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--  ── BOTTONE CALCOLA ──  -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCalcola"
+            style="@style/DrugDose.Button"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="CALCOLA DOSE"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/cardFarmaco"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+        <!--  ── CARD RISULTATO ──  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardRisultato"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_result_card"
+            android:padding="20dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btnCalcola"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/lblRisultato"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RISULTATO"
+                android:textSize="11sp"
+                android:textColor="@color/accent_primary"
+                android:textStyle="bold"
+                android:letterSpacing="0.15"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/txtDoseTotale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/lblRisultato"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/txtDoseSomm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@id/txtDoseTotale"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/txtMetodo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:textColor="@color/text_hint"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/txtDoseSomm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <!--  Divider  -->
+            <View
+                android:id="@+id/dividerRisultato"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/txtMetodo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/txtFonte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="11sp"
+                android:textColor="@color/text_hint"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/dividerRisultato"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--  ── CARD ALERT ──  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardAlert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_alert_card"
+            android:padding="16dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/cardRisultato"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/lblAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚠ AVVISO CLINICO"
+                android:textSize="11sp"
+                android:textColor="@color/alert_warning"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/txtAlert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="13sp"
+                android:textColor="@color/alert_warning"
+                android:layout_marginTop="6dp"
+                app:layout_constraintTop_toBottomOf="@id/lblAlert"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--  ── ERRORE ──  -->
+        <TextView
+            android:id="@+id/txtErrore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="@color/alert_error"
+            android:textAlignment="center"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btnCalcola"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

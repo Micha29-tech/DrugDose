@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">DrugDose</string>
     <string name="title_drugdose">DrugDose</string>
-    <string name="hint_peso">Peso (kg)</string>
-    <string name="hint_altezza">Altezza (cm)</string>
+    <string name="hint_peso">Peso</string>
+    <string name="hint_altezza">Altezza</string>
     <string name="hint_eta">Età</string>
-    <string name="btn_calcola">Calcola</string>
+    <string name="btn_calcola">CALCOLA DOSE</string>
     <string name="label_risultato">Risultato</string>
     <string name="hint_farmaco">Seleziona farmaco</string>
+    <string name="err_peso_vuoto">Inserire il peso</string>
+    <string name="err_altezza_vuota">Inserire l\'altezza</string>
+    <string name="err_eta_vuota">Inserire l\'età</string>
+    <string name="err_peso_invalido">Peso non valido</string>
+    <string name="err_altezza_invalida">Altezza non valida</string>
+    <string name="err_eta_invalida">Età non valida</string>
 
     <string-array name="lista_farmaci">
         <item>Paracetamolo</item>
