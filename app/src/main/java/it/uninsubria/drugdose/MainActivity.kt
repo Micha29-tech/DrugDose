@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
             }
             if(altezzaText.isEmpty()){
                 etAltezza.error="Inserire l'altezza"
-                    return@setOnClickListener
-                }
+                return@setOnClickListener
+            }
 
             if(etaText.isEmpty()){
                 etEta.error="Inserire l'età"
@@ -41,18 +41,18 @@ class MainActivity : AppCompatActivity() {
             val altezza= altezzaText.toDoubleOrNull()
             val eta= etaText.toIntOrNull()
 
-                if(peso == null || peso <= 0 ){
-                    etPeso.error = "Peso non valido"
-                    return@setOnClickListener
+            if(peso == null || peso <= 0 ){
+                etPeso.error = "Peso non valido"
+                return@setOnClickListener
 
-                }
-                if(altezza == null || altezza <= 0 ){
-                    etAltezza.error="Altezza non valida"
-                    return@setOnClickListener
-                }
-                 if(eta == null || eta < 0){
-                     etEta.error = "Età non valida"
-                     return@setOnClickListener
+            }
+            if(altezza == null || altezza <= 0 ){
+                etAltezza.error="Altezza non valida"
+                return@setOnClickListener
+            }
+            if(eta == null || eta < 0){
+                etEta.error = "Età non valida"
+                return@setOnClickListener
             }
             txtRisultato.text = "Peso: $peso kg, Altezza: $altezza cm, Età: $eta"
         }
