@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_dark">#FF0F172A</color>
-    <color name="bg_card">#FF1E293B</color>
-    <color name="bg_input">#FF273449</color>
-    <color name="bg_result">#FF111827</color>
+    <!-- Sfondi-->
+    <color name="bg_light">#FFF8FFFE</color>
+    <color name="bg_card">#FFFFFFFF</color>
+    <color name="bg_input">#FFF1F5F9</color>
+    <color name="bg_gradient_start">#FFE0F7F4</color>
+    <color name="bg_gradient_end">#FFFCE4EC</color>
 
-    <color name="accent_primary">#FF14B8A6</color>
-    <color name="accent_secondary">#FF0EA5E9</color>
-    <color name="accent_glow">#3314B8A6</color>
+    <color name="accent_primary">#FF2DD4BF</color>
+    <color name="accent_secondary">#FF38BDF8</color>
+    <color name="accent_glow">#332DD4BF</color>
+    <color name="accent_pink">#FFFB7185</color>
+    <color name="accent_purple">#FFA78BFA</color>
 
-
+    <!-- Alert -->
     <color name="alert_warning">#FFF59E0B</color>
     <color name="alert_error">#FFEF4444</color>
     <color name="alert_success">#FF22C55E</color>
+    <color name="alert_warning_bg">#FFFFF8E1</color>
+    <color name="alert_error_bg">#FFFFF1F0</color>
 
-
-    <color name="text_primary">#FFF8FAFC</color>
-    <color name="text_secondary">#FFCBD5E1</color>
+    <!-- Testo -->
+    <color name="text_primary">#FF0F172A</color>
+    <color name="text_secondary">#FF475569</color>
     <color name="text_hint">#FF94A3B8</color>
 
-
-    <color name="divider">#FF334155</color>
+    <!-- UI -->
+    <color name="divider">#FFE2E8F0</color>
 
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
