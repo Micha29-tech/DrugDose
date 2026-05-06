@@ -1,5 +1,6 @@
-package it.uninsubria.drugdose;
+package it.uninsubria.drugdose
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,9 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import it.uninsubria.drugdose.DrugDoseViewModel
 import it.uninsubria.drugdose.calculator.DosageCalculator
 import it.uninsubria.drugdose.model.Farmaco
+import it.uninsubria.drugdose.model.TipoFormula
 import it.uninsubria.drugdose.repository.FarmaciRepository
 
 class MainActivity : AppCompatActivity() {
@@ -26,16 +27,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var etAltezza: TextInputEditText
     private lateinit var etEta: TextInputEditText
     private lateinit var spinnerFarmaco: Spinner
-    private lateinit var txtFarmacoInfo: TextView
     private lateinit var btnCalcola: MaterialButton
-    private lateinit var cardRisultato: View
-    private lateinit var txtDoseTotale: TextView
-    private lateinit var txtDoseSomm: TextView
-    private lateinit var txtMetodo: TextView
-    private lateinit var txtFonte: TextView
-    private lateinit var cardAlert: View
-    private lateinit var txtAlert: TextView
     private lateinit var txtErrore: TextView
+
+    // Nuovi campi info farmaco
+    private lateinit var txtIndicazione: TextView
+    private lateinit var layoutVincoli: View
+    private lateinit var txtFormula: TextView
+    private lateinit var txtEtaMin: TextView
 
     // ── DATI ──
     private lateinit var listaFarmaci: List<Farmaco>
@@ -67,16 +66,14 @@ class MainActivity : AppCompatActivity() {
         etAltezza      = findViewById(R.id.etAltezza)
         etEta          = findViewById(R.id.etEta)
         spinnerFarmaco = findViewById(R.id.spinnerFarmaco)
-        txtFarmacoInfo = findViewById(R.id.txtFarmacoInfo)
         btnCalcola     = findViewById(R.id.btnCalcola)
-        cardRisultato  = findViewById(R.id.cardRisultato)
-        txtDoseTotale  = findViewById(R.id.txtDoseTotale)
-        txtDoseSomm    = findViewById(R.id.txtDoseSomm)
-        txtMetodo      = findViewById(R.id.txtMetodo)
-        txtFonte       = findViewById(R.id.txtFonte)
-        cardAlert      = findViewById(R.id.cardAlert)
-        txtAlert       = findViewById(R.id.txtAlert)
         txtErrore      = findViewById(R.id.txtErrore)
+
+        // Nuovi campi layout aggiornato
+        txtIndicazione = findViewById(R.id.txtIndicazione)
+        layoutVincoli  = findViewById(R.id.layoutVincoli)
+        txtFormula     = findViewById(R.id.txtFormula)
+        txtEtaMin      = findViewById(R.id.txtEtaMin)
     }
 
     private fun caricaFarmaci() {
@@ -90,11 +87,11 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item,
+            R.layout.spinner_item,//layout personalizzato
             listaFarmaci.map { it.nomeFarmaco }
         )
         adapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item
+            R.layout.spinner_dropdown_item //dropdown personalizzzato
         )
         spinnerFarmaco.adapter = adapter
 
@@ -107,18 +104,28 @@ class MainActivity : AppCompatActivity() {
                     position: Int,
                     id: Long
                 ) {
-                    farmacoSelezionato       = listaFarmaci[position]
+                    farmacoSelezionato         = listaFarmaci[position]
                     viewModel.posizioneSpinner = position
 
                     farmacoSelezionato?.let { f ->
-                        txtFarmacoInfo.visibility = View.VISIBLE
-                        txtFarmacoInfo.text = buildString {
-                            append(f.principioAttivo)
-                            append(" · ")
-                            append(f.indicazioneClinica)
-                            f.etaMin?.let { append(" · Età min: $it anni") }
+
+                        // Indicazione clinica
+                        txtIndicazione.visibility = View.VISIBLE
+                        txtIndicazione.text = "📋 ${f.indicazioneClinica}"
+
+                        // Formula e vincoli
+                        layoutVincoli.visibility = View.VISIBLE
+                        txtFormula.text = when (f.tipoFormula) {
+                            TipoFormula.per_kg -> "mg/kg"
+                            TipoFormula.per_m2 -> "mg/m²"
+                            TipoFormula.fissa  -> "Fissa"
+                            TipoFormula.fasce  -> "Fasce"
                         }
+                        txtEtaMin.text = f.etaMin
+                            ?.let { "$it anni" }
+                            ?: "Nessun limite"
                     }
+
                     nascondiRisultato()
                 }
 
@@ -138,7 +145,7 @@ class MainActivity : AppCompatActivity() {
         val altezzaText = etAltezza.text.toString().trim()
         val etaText     = etEta.text.toString().trim()
 
-        //  Validazione campi vuoti
+        // ── Validazione campi vuoti ──
         if (pesoText.isEmpty()) {
             tilPeso.error = "Inserire il peso"
             return
@@ -152,12 +159,12 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // Conversione
+        // ── Conversione ──
         val peso    = pesoText.toDoubleOrNull()
         val altezza = altezzaText.toDoubleOrNull()
         val eta     = etaText.toIntOrNull()
 
-        //  Validazione valori
+        // ── Validazione valori ──
         if (peso == null || peso <= 0 || peso > 300) {
             tilPeso.error = "Peso non valido"
             return
@@ -178,27 +185,29 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // Validazione età minima farmaco
+        // ── Validazione età minima farmaco ──
         farmaco.etaMin?.let { etaMin ->
             if (eta < etaMin) {
-                txtErrore.text = "⚠ ${farmaco.nomeFarmaco} " +
-                        "è indicato solo per pazienti ≥ $etaMin anni"
+                txtErrore.text =
+                    "⚠ ${farmaco.nomeFarmaco} è indicato " +
+                            "solo per pazienti ≥ $etaMin anni"
                 txtErrore.visibility = View.VISIBLE
                 return
             }
         }
 
-        // Validazione peso minimo farmaco
+        // ── Validazione peso minimo farmaco ──
         farmaco.pesoMinimo?.let { pesoMin ->
             if (peso < pesoMin) {
-                txtErrore.text = "⚠ ${farmaco.nomeFarmaco} " +
-                        "richiede peso minimo di $pesoMin kg"
+                txtErrore.text =
+                    "⚠ ${farmaco.nomeFarmaco} richiede " +
+                            "peso minimo di $pesoMin kg"
                 txtErrore.visibility = View.VISIBLE
                 return
             }
         }
 
-        // Calcolo
+        // ── Calcolo ──
         val risultato = DosageCalculator.calcola(
             farmaco   = farmaco,
             pesoKg    = peso,
@@ -222,61 +231,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Apre ResultActivity con i dati calcolati
     private fun mostraRisultato(
         farmaco: Farmaco,
         successo: DosageCalculator.Risultato.Successo,
         eta: Int
     ) {
-        // Dose totale
-        txtDoseTotale.text = "%.1f mg".format(successo.doseTotaleMg)
-
-        // Dose per somministrazione
-        txtDoseSomm.text = buildString {
-            append("%.1f mg".format(successo.doseSomministrazioneMg))
-            append(" × ${farmaco.numeroSomministrazioni} somm./die")
+        val intent = Intent(this, ResultActivity::class.java).apply {
+            putExtra("nomeFarmaco",     farmaco.nomeFarmaco)
+            putExtra("principioAttivo", farmaco.principioAttivo)
+            putExtra("indicazione",     farmaco.indicazioneClinica)
+            putExtra("doseTotale",      successo.doseTotaleMg)
+            putExtra("doseSomm",        successo.doseSomministrazioneMg)
+            putExtra("numSomm",         farmaco.numeroSomministrazioni)
+            putExtra("metodo",          successo.metodo)
+            putExtra("fonte",           farmaco.fonte)
+            putExtra("alert",           farmaco.alert ?: "")
+            successo.bsa?.let { putExtra("bsa", it) }
         }
-
-        // Metodo di calcolo
-        txtMetodo.text = buildString {
-            append("Metodo: ${successo.metodo}")
-            successo.bsa?.let {
-                append("\nBSA: ${"%.2f".format(it)} m²")
-            }
-        }
-
-        // Fonte
-        txtFonte.text = "Fonte: ${farmaco.fonte}"
-
-        // Mostra card risultato
-        cardRisultato.visibility = View.VISIBLE
-
-        // Alert clinico
-        val alertMsg = buildString {
-            if (!farmaco.alert.isNullOrEmpty()) {
-                append(farmaco.alert)
-            }
-            // Avviso aggiuntivo se vicino all'età minima
-            farmaco.etaMin?.let { etaMin ->
-                if (eta < etaMin + 3) {
-                    if (isNotEmpty()) append("\n\n")
-                    append("⚠ Paziente vicino al limite " +
-                            "di età minima ($etaMin anni)")
-                }
-            }
-        }
-
-        if (alertMsg.isNotEmpty()) {
-            txtAlert.text        = alertMsg
-            cardAlert.visibility = View.VISIBLE
-        } else {
-            cardAlert.visibility = View.GONE
-        }
+        startActivity(intent)
     }
 
     private fun nascondiRisultato() {
-        cardRisultato.visibility = View.GONE
-        cardAlert.visibility     = View.GONE
-        txtErrore.visibility     = View.GONE
+        txtErrore.visibility = View.GONE
+        txtIndicazione.visibility = View.GONE
+        layoutVincoli.visibility  = View.GONE
     }
 
     private fun ripristinaDatiRotazione() {
@@ -287,12 +266,11 @@ class MainActivity : AppCompatActivity() {
         if (viewModel.eta > 0)
             etEta.setText(viewModel.eta.toString())
 
-        // Ripristina spinner
         spinnerFarmaco.setSelection(viewModel.posizioneSpinner)
 
-        // Ricalcola se il risultato era visibile
         if (viewModel.risultatoVisibile) {
             calcolaDosaggio()
         }
     }
 }
+
